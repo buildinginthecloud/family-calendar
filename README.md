@@ -30,7 +30,13 @@ family-calendar/
 │   │   ├── AuthenticationLambda.ts
 │   │   ├── ConfigurationLambda.ts
 │   │   ├── EventsLambda.ts
+│   │   ├── IpAllowlistManager.ts
 │   │   └── handler/                    # Lambda function code
+│   │       ├── authentication.ts       # Dual auth validation
+│   │       ├── ip-allowlist-manager.ts # IP management
+│   │       ├── calendar-sync.ts
+│   │       ├── configuration.ts
+│   │       └── events.ts
 │   └── frontend/                       # React components
 │       ├── components/
 │       │   ├── CalendarDisplay.tsx
@@ -50,7 +56,9 @@ family-calendar/
 ├── tsconfig.json
 ├── cdk.json                            # CDK configuration
 ├── jest.config.js                      # Jest configuration
-└── .eslintrc.js                        # ESLint configuration
+├── .eslintrc.js                        # ESLint configuration
+├── AUTHENTICATION_SETUP.md             # Authentication documentation
+└── README.md                           # This file
 ```
 
 ## 🚀 Getting Started
@@ -159,7 +167,11 @@ Following `.kiro/steering/security-best-practices.md`:
 - ✅ Least privilege IAM policies
 - ✅ WAF rules for rate limiting and common attacks
 - ✅ Cognito for user authentication
-- ✅ Security logging enabled
+- ✅ Dual validation (IP + Cognito token)
+- ✅ Security audit logging enabled
+- ✅ Optional MFA for enhanced security
+
+For detailed authentication setup and configuration, see [AUTHENTICATION_SETUP.md](./AUTHENTICATION_SETUP.md).
 
 ## 📐 TypeScript Configuration
 
@@ -289,6 +301,7 @@ Each property is validated through property-based tests in `test/properties/`.
 
 ## 📚 Additional Documentation
 
+- **Authentication Setup**: `AUTHENTICATION_SETUP.md` - Comprehensive guide to authentication and security
 - Design Document: `.kiro/specs/family-calendar-display/design.md`
 - Requirements: `.kiro/specs/family-calendar-display/requirements.md`
 - Tasks: `.kiro/specs/family-calendar-display/tasks.md`
