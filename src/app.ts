@@ -20,6 +20,9 @@ const tags = {
   ManagedBy: 'CDK',
 };
 
+// Optional: Configure allowed IP addresses for WAF (can be set via context)
+const allowedIPs = app.node.tryGetContext('allowedIPs') as string[] | undefined;
+
 // Data Stack - DynamoDB, Secrets Manager
 const dataStack = new DataStack(app, 'FamilyCalendarDataStack', {
   env,
@@ -30,6 +33,7 @@ const dataStack = new DataStack(app, 'FamilyCalendarDataStack', {
 const authStack = new AuthStack(app, 'FamilyCalendarAuthStack', {
   env,
   description: 'Authentication layer for Family Calendar Display - Cognito and WAF',
+  allowedIPs,
 });
 
 // Backend Stack - API Gateway, Lambda
@@ -38,13 +42,15 @@ const backendStack = new BackendStack(app, 'FamilyCalendarBackendStack', {
   description: 'Backend API layer for Family Calendar Display - API Gateway and Lambda',
   dataStack,
   authStack,
+  initialAllowedIPs: allowedIPs,
 });
 
-// Frontend Stack - CloudFront, S3
+// Frontend Stack - CloudFront, S3 with WAF integration
 const frontendStack = new FrontendStack(app, 'FamilyCalendarFrontendStack', {
   env,
   description: 'Frontend layer for Family Calendar Display - CloudFront and S3',
   apiEndpoint: backendStack.apiEndpoint,
+  webAclArn: authStack.webAcl.attrArn,
 });
 
 // Apply tags to all stacks
