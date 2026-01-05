@@ -55,7 +55,9 @@ export class ConfigurationLambda extends Construct {
           'secretsmanager:DescribeSecret',
           'secretsmanager:UpdateSecret',
         ],
-        resources: [`arn:aws:secretsmanager:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:secret:family-calendar/*`],
+        resources: [
+          `arn:aws:secretsmanager:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:secret:family-calendar/*`,
+        ],
       })
     );
   }

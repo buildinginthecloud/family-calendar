@@ -199,9 +199,9 @@ aws logs filter-log-events \
 ## 📞 Support
 
 For detailed information:
-- Setup: See `AUTHENTICATION_SETUP.md`
-- Requirements: See `.kiro/specs/family-calendar-display/requirements.md`
-- Design: See `.kiro/specs/family-calendar-display/design.md`
+- Setup: See `SETUP_INSTRUCTIONS.md`
+- Requirements: See `../.kiro/specs/family-calendar-display/requirements.md`
+- Design: See `../.kiro/specs/family-calendar-display/design.md`
 
 ## 🎉 Status
 

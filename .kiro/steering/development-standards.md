@@ -29,15 +29,33 @@ inclusion: always
 - Avoid temporary or backup files in version control
 - Organize code logically by feature or domain
 - Keep configuration files at appropriate levels (project vs user)
+- **Place all project documentation in a `docs/` folder** to maintain clean root directory structure
+- Keep only essential files (README.md, package.json, etc.) in the project root
 
 ## Documentation Approach
 - Maintain single comprehensive README covering all aspects including deployment
+- **Organize detailed documentation in a `docs/` folder** with clear, descriptive filenames
+- Keep README.md in project root as the main entry point with links to detailed docs
 - Reference official sources through MCP servers when available
 - Update documentation when upgrading dependencies
 - Keep documentation close to relevant code
 - Use inline comments for complex business logic
 - Document API endpoints and data structures
 - Include setup and deployment instructions
+
+### Documentation Structure
+```
+project-root/
+├── README.md                    # Main project documentation (overview, quick start)
+├── docs/                        # Detailed documentation folder
+│   ├── SETUP_INSTRUCTIONS.md    # Detailed setup guide
+│   ├── QUICKSTART.md            # Quick start guide
+│   ├── PROJECT_STRUCTURE.md     # File organization
+│   ├── DEPLOYMENT.md            # Deployment instructions
+│   ├── API.md                   # API documentation
+│   └── TROUBLESHOOTING.md       # Common issues and solutions
+└── [project files]
+```
 
 ## Version Control Integration
 - Commit frequently with meaningful messages

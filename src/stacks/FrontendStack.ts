@@ -2,8 +2,6 @@ import * as cdk from 'aws-cdk-lib';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
-import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
-import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
 import { Construct } from 'constructs';
 
 export interface FrontendStackProps extends cdk.StackProps {

@@ -1,5 +1,5 @@
 import * as fc from 'fast-check';
-import { CalendarEvent, RecurrencePattern } from '../../src/frontend/types/models';
+import { CalendarEvent } from '../../src/frontend/types/models';
 
 /**
  * Property-Based Tests for Family Calendar Display
@@ -92,7 +92,8 @@ describe('Property-Based Tests', () => {
         const result = authenticateUser(attempt);
 
         // Property: Access granted only if BOTH IP is allowed AND token is valid
-        const expectedResult = attempt.isIpAllowed && attempt.token !== null && attempt.isTokenValid;
+        const expectedResult =
+          attempt.isIpAllowed && attempt.token !== null && attempt.isTokenValid;
 
         return result === expectedResult;
       })
@@ -109,18 +110,18 @@ describe('Property-Based Tests', () => {
     interface SecurityLog {
       timestamp: Date;
       ipAddress: string;
-      userId?: string;
-      username?: string;
+      userId?: string | null;
+      username?: string | null;
       result: 'success' | 'failure';
       reason?: string;
     }
 
     interface AuthenticationAttempt {
       ipAddress: string;
-      userId?: string;
-      username?: string;
+      userId?: string | null;
+      username?: string | null;
       authorized: boolean;
-      reason?: string;
+      reason?: string | null;
     }
 
     const authenticationAttemptArbitrary = fc.record({
@@ -164,11 +165,6 @@ describe('Property-Based Tests', () => {
 
         // Property 2: Failed attempts must have a reason (no sensitive info exposure)
         const failureHasReason = log.result === 'failure' ? log.reason !== undefined : true;
-
-        // Property 3: Success logs may include user details
-        const successCanHaveUserDetails = log.result === 'success'
-          ? true
-          : log.userId === undefined || log.username === undefined;
 
         return hasRequiredFields && failureHasReason;
       })

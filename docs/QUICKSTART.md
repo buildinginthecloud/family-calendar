@@ -33,8 +33,8 @@ Before you can use this project, ensure you have the following installed:
 # 1. Navigate to project directory
 cd /projects/sandbox/family-calendar
 
-# 2. Install dependencies
-npm install
+# 2. Ensure Projen configuration is up-to-date
+npm run projen
 
 # 3. Build the project
 npm run build
@@ -46,7 +46,7 @@ npm test
 npm run cdk:synth
 
 # 6. Bootstrap AWS account (first time only)
-npx cdk bootstrap
+npm run cdk:bootstrap
 
 # 7. Deploy all stacks
 npm run cdk:deploy -- --all
@@ -138,7 +138,7 @@ Node.js is not installed. Follow the Node.js installation steps above.
 ### "Cannot find module" errors after pulling
 ```bash
 rm -rf node_modules/
-npm install
+npm run projen  # This will also run npm install
 npm run build
 ```
 
@@ -183,15 +183,17 @@ npm test -- -u
 
 ## Resources
 
-- [Project README](README.md) - Comprehensive documentation
+- [Project README](../README.md) - Comprehensive documentation
 - [Project Structure](PROJECT_STRUCTURE.md) - Detailed file organization
-- [Design Document](.kiro/specs/family-calendar-display/design.md)
-- [CDK Best Practices](.kiro/steering/cdk-best-practices.md)
+- [Setup Instructions](SETUP_INSTRUCTIONS.md) - Detailed setup guide
+- [Authentication Setup](AUTHENTICATION_SETUP.md) - Authentication configuration
+- [Design Document](../.kiro/specs/family-calendar-display/design.md)
+- [CDK Best Practices](../.kiro/steering/cdk-best-practices.md)
 - [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/)
 
 ## Getting Help
 
-1. Check the [README.md](README.md) for detailed documentation
-2. Review best practices in `.kiro/steering/` directory
-3. Consult the design document in `.kiro/specs/family-calendar-display/`
+1. Check the [README.md](../README.md) for detailed documentation
+2. Review best practices in `../.kiro/steering/` directory
+3. Consult the design document in `../.kiro/specs/family-calendar-display/`
 4. Check AWS CDK documentation for specific AWS service questions

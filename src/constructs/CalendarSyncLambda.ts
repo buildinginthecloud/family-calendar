@@ -51,11 +51,10 @@ export class CalendarSyncLambda extends Construct {
     this.function.addToRolePolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: [
-          'secretsmanager:GetSecretValue',
-          'secretsmanager:DescribeSecret',
+        actions: ['secretsmanager:GetSecretValue', 'secretsmanager:DescribeSecret'],
+        resources: [
+          `arn:aws:secretsmanager:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:secret:family-calendar/*`,
         ],
-        resources: [`arn:aws:secretsmanager:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:secret:family-calendar/*`],
       })
     );
   }

@@ -52,10 +52,7 @@ export class AuthenticationLambda extends Construct {
     this.function.addToRolePolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: [
-          'cognito-idp:GetUser',
-          'cognito-idp:DescribeUserPool',
-        ],
+        actions: ['cognito-idp:GetUser', 'cognito-idp:DescribeUserPool'],
         resources: [props.userPool.userPoolArn],
       })
     );
@@ -64,11 +61,7 @@ export class AuthenticationLambda extends Construct {
     this.function.addToRolePolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: [
-          'logs:CreateLogGroup',
-          'logs:CreateLogStream',
-          'logs:PutLogEvents',
-        ],
+        actions: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents'],
         resources: ['*'],
       })
     );

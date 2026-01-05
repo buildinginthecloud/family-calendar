@@ -1,6 +1,13 @@
-import { CloudFormationCustomResourceEvent, CloudFormationCustomResourceResponse } from 'aws-lambda';
+import {
+  CloudFormationCustomResourceEvent,
+  CloudFormationCustomResourceResponse,
+} from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  PutCommand,
+  GetCommand,
+} from '@aws-sdk/lib-dynamodb';
 
 /**
  * IP Allowlist Manager Lambda Handler
@@ -62,9 +69,9 @@ async function getIpAllowlist(): Promise<string[]> {
 /**
  * Add IP to allowlist
  */
-async function addIpToAllowlist(ipAddress: string): Promise<void> {
+async function _addIpToAllowlist(ipAddress: string): Promise<void> {
   const currentIPs = await getIpAllowlist();
-  
+
   if (!currentIPs.includes(ipAddress)) {
     currentIPs.push(ipAddress);
     await updateIpAllowlist(currentIPs);
@@ -77,10 +84,10 @@ async function addIpToAllowlist(ipAddress: string): Promise<void> {
 /**
  * Remove IP from allowlist
  */
-async function removeIpFromAllowlist(ipAddress: string): Promise<void> {
+async function _removeIpFromAllowlist(ipAddress: string): Promise<void> {
   const currentIPs = await getIpAllowlist();
   const updatedIPs = currentIPs.filter((ip) => ip !== ipAddress);
-  
+
   if (updatedIPs.length !== currentIPs.length) {
     await updateIpAllowlist(updatedIPs);
     console.log('IP removed from allowlist', { ipAddress });
@@ -101,14 +108,14 @@ export async function handler(
   });
 
   try {
-    const allowedIPs = event.ResourceProperties.allowedIPs as string[] || [];
+    const allowedIPs = (event.ResourceProperties.allowedIPs as string[]) || [];
 
     switch (event.RequestType) {
       case 'Create':
       case 'Update':
         await updateIpAllowlist(allowedIPs);
         break;
-      
+
       case 'Delete':
         // Don't delete the allowlist on stack deletion for safety
         console.log('Stack deletion - preserving IP allowlist configuration');
@@ -127,7 +134,7 @@ export async function handler(
     };
   } catch (error) {
     console.error('Error managing IP allowlist:', error);
-    
+
     return {
       Status: 'FAILED',
       Reason: error instanceof Error ? error.message : 'Unknown error',

@@ -1,7 +1,10 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
-import { CognitoIdentityProviderClient, GetUserCommand } from '@aws-sdk/client-cognito-identity-provider';
+import {
+  CognitoIdentityProviderClient,
+  GetUserCommand,
+} from '@aws-sdk/client-cognito-identity-provider';
 
 /**
  * Authentication Lambda Handler
@@ -37,7 +40,7 @@ const docClient = DynamoDBDocumentClient.from(dynamoClient);
 const cognitoClient = new CognitoIdentityProviderClient({});
 
 const CONFIGURATIONS_TABLE = process.env.CONFIGURATIONS_TABLE_NAME!;
-const USER_POOL_ID = process.env.USER_POOL_ID!;
+const _USER_POOL_ID = process.env.USER_POOL_ID!;
 
 /**
  * Log security audit event
@@ -45,10 +48,12 @@ const USER_POOL_ID = process.env.USER_POOL_ID!;
  * Property 5: Security Audit Logging
  */
 function logSecurityAudit(auditLog: SecurityAuditLog): void {
-  console.log(JSON.stringify({
-    eventType: 'SECURITY_AUDIT',
-    ...auditLog,
-  }));
+  console.log(
+    JSON.stringify({
+      eventType: 'SECURITY_AUDIT',
+      ...auditLog,
+    })
+  );
 }
 
 /**

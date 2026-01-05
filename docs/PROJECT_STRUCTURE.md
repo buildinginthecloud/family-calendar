@@ -1,7 +1,12 @@
 # Project Structure
 
+**Project Management**: This project uses [Projen](https://projen.io/) for project initialization and file management, following CDK best practices. All project configuration is managed through `.projenrc.ts`.
+
 ```
 family-calendar/
+│
+├── .projenrc.ts                        # Projen configuration (EDIT THIS)
+├── .projenrc.js                        # Compiled Projen config (generated)
 │
 ├── bin/
 │   └── family-calendar.js              # CDK CLI entry point
@@ -20,12 +25,14 @@ family-calendar/
 │   │   ├── AuthenticationLambda.ts     # Authentication handler
 │   │   ├── ConfigurationLambda.ts      # Configuration management
 │   │   ├── EventsLambda.ts             # Events API handler
+│   │   ├── IpAllowlistManager.ts       # IP management construct
 │   │   │
 │   │   └── handler/                    # Lambda Function Code
 │   │       ├── calendar-sync.ts        # Calendar sync logic
 │   │       ├── authentication.ts       # Auth validation logic
 │   │       ├── configuration.ts        # Config CRUD logic
-│   │       └── events.ts               # Events query logic
+│   │       ├── events.ts               # Events query logic
+│   │       └── ip-allowlist-manager.ts # IP management logic
 │   │
 │   └── frontend/                       # React Frontend
 │       ├── components/                 # React Components
@@ -51,24 +58,42 @@ family-calendar/
 │   │
 │   └── setup.ts                        # Test configuration
 │
-├── Configuration Files
-│   ├── package.json                    # Dependencies & scripts
-│   ├── tsconfig.json                   # TypeScript config
-│   ├── cdk.json                        # CDK config
-│   ├── jest.config.js                  # Jest config
-│   ├── .eslintrc.js                    # ESLint config
-│   ├── .prettierrc                     # Prettier config
-│   └── .gitignore                      # Git ignore rules
+├── docs/                               # Documentation
+│   ├── QUICKSTART.md                   # Quick start guide
+│   ├── SETUP_INSTRUCTIONS.md           # Detailed setup guide
+│   ├── PROJECT_STRUCTURE.md            # File organization (this file)
+│   ├── AUTHENTICATION_SETUP.md         # Authentication guide
+│   └── IMPLEMENTATION_SUMMARY.md       # Implementation status
+│
+├── Configuration Files (Projen-managed)
+│   ├── package.json                    # Dependencies & scripts (generated)
+│   ├── tsconfig.json                   # TypeScript config (generated)
+│   ├── tsconfig.dev.json               # Dev TypeScript config (generated)
+│   ├── cdk.json                        # CDK config (generated)
+│   ├── .eslintrc.json                  # ESLint config (generated)
+│   ├── .prettierrc.json                # Prettier config (generated)
+│   ├── .prettierignore                 # Prettier ignore (generated)
+│   ├── .npmignore                      # NPM ignore (generated)
+│   ├── .gitignore                      # Git ignore rules (generated)
+│   ├── .gitattributes                  # Git attributes (generated)
+│   └── LICENSE                         # License file (generated)
 │
 ├── Documentation
 │   ├── README.md                       # Main documentation
-│   └── PROJECT_STRUCTURE.md            # This file
+│   └── docs/                           # Detailed documentation
+│       ├── PROJECT_STRUCTURE.md        # This file
+│       ├── SETUP_INSTRUCTIONS.md       # Setup guide
+│       ├── QUICKSTART.md               # Quick start guide
+│       ├── AUTHENTICATION_SETUP.md     # Authentication guide
+│       └── IMPLEMENTATION_SUMMARY.md   # Implementation summary
 │
 └── Generated (not in repo)
+    ├── .projen/                        # Projen metadata
     ├── node_modules/                   # Dependencies
     ├── lib/                            # Compiled JavaScript
     ├── cdk.out/                        # CDK synthesis output
-    └── coverage/                       # Test coverage reports
+    ├── coverage/                       # Test coverage reports
+    └── test-reports/                   # Test result reports
 ```
 
 ## Directory Purposes
@@ -120,15 +145,29 @@ Test files organized by type:
 
 ## Key Configuration Files
 
-| File | Purpose |
-|------|---------|
-| `package.json` | Project metadata, dependencies, and npm scripts |
-| `tsconfig.json` | TypeScript compiler configuration (strict mode) |
-| `cdk.json` | CDK app configuration and feature flags |
-| `jest.config.js` | Jest test framework configuration |
-| `.eslintrc.js` | ESLint code quality rules |
-| `.prettierrc` | Code formatting rules |
-| `.gitignore` | Files excluded from version control |
+**⚠️ IMPORTANT**: The following files are managed by Projen and should NOT be edited manually:
+
+| File | Purpose | Managed By |
+|------|---------|------------|
+| `package.json` | Project metadata, dependencies, and npm scripts | Projen |
+| `tsconfig.json` | TypeScript compiler configuration (strict mode) | Projen |
+| `tsconfig.dev.json` | Development TypeScript configuration | Projen |
+| `cdk.json` | CDK app configuration and feature flags | Projen |
+| `.eslintrc.json` | ESLint code quality rules | Projen |
+| `.prettierrc.json` | Code formatting rules | Projen |
+| `.prettierignore` | Files excluded from Prettier formatting | Projen |
+| `.npmignore` | Files excluded from NPM package | Projen |
+| `.gitignore` | Files excluded from version control | Projen |
+| `.gitattributes` | Git file attributes | Projen |
+| `LICENSE` | Project license | Projen |
+
+**To modify these files**: Edit `.projenrc.ts` and run `npm run projen`
+
+**Manually editable files**:
+- `.projenrc.ts` - Projen configuration
+- All files in `src/` - Source code
+- All files in `test/` - Test code
+- Documentation files (README.md, etc.)
 
 ## Import Path Aliases
 
@@ -160,6 +199,16 @@ bin/family-calendar.js
       → Stacks use Constructs
         → Constructs create AWS Resources
           → CDK synthesizes CloudFormation
+```
+
+## Projen Workflow
+
+```
+Edit .projenrc.ts
+  → Run `npm run projen`
+    → Regenerates configuration files
+      → Run `npm install` (if dependencies changed)
+        → Continue development
 ```
 
 ## Testing Flow

@@ -67,11 +67,7 @@ export class AuthStack extends cdk.Stack {
         flows: {
           authorizationCodeGrant: true,
         },
-        scopes: [
-          cognito.OAuthScope.EMAIL,
-          cognito.OAuthScope.OPENID,
-          cognito.OAuthScope.PROFILE,
-        ],
+        scopes: [cognito.OAuthScope.EMAIL, cognito.OAuthScope.OPENID, cognito.OAuthScope.PROFILE],
       },
     });
 
@@ -151,9 +147,10 @@ export class AuthStack extends cdk.Stack {
     this.webAcl = new wafv2.CfnWebACL(this, 'WebACL', {
       name: 'FamilyCalendarWebACL',
       scope: 'CLOUDFRONT',
-      defaultAction: props?.allowedIPs && props.allowedIPs.length > 0
-        ? { block: {} } // Block by default if IP allowlist is configured
-        : { allow: {} }, // Allow by default if no IP restriction
+      defaultAction:
+        props?.allowedIPs && props.allowedIPs.length > 0
+          ? { block: {} } // Block by default if IP allowlist is configured
+          : { allow: {} }, // Allow by default if no IP restriction
       rules: wafRules,
       visibilityConfig: {
         sampledRequestsEnabled: true,

@@ -98,14 +98,10 @@ export class BackendStack extends cdk.Stack {
 
     // API Resources and methods
     const eventsResource = this.api.root.addResource('events');
-    eventsResource.addMethod(
-      'GET',
-      new apigateway.LambdaIntegration(eventsLambda.function),
-      {
-        authorizer,
-        authorizationType: apigateway.AuthorizationType.COGNITO,
-      }
-    );
+    eventsResource.addMethod('GET', new apigateway.LambdaIntegration(eventsLambda.function), {
+      authorizer,
+      authorizationType: apigateway.AuthorizationType.COGNITO,
+    });
 
     const configResource = this.api.root.addResource('config');
     configResource.addMethod(
@@ -134,14 +130,10 @@ export class BackendStack extends cdk.Stack {
     );
 
     const syncResource = this.api.root.addResource('sync');
-    syncResource.addMethod(
-      'POST',
-      new apigateway.LambdaIntegration(calendarSyncLambda.function),
-      {
-        authorizer,
-        authorizationType: apigateway.AuthorizationType.COGNITO,
-      }
-    );
+    syncResource.addMethod('POST', new apigateway.LambdaIntegration(calendarSyncLambda.function), {
+      authorizer,
+      authorizationType: apigateway.AuthorizationType.COGNITO,
+    });
 
     // Authentication endpoints (no Cognito authorizer for initial authentication)
     const authResource = this.api.root.addResource('auth');
@@ -153,22 +145,14 @@ export class BackendStack extends cdk.Stack {
 
     // IP allowlist management endpoints (requires Cognito authorization)
     const ipResource = authResource.addResource('ip-allowlist');
-    ipResource.addMethod(
-      'GET',
-      new apigateway.LambdaIntegration(ipAllowlistManager.function),
-      {
-        authorizer,
-        authorizationType: apigateway.AuthorizationType.COGNITO,
-      }
-    );
-    ipResource.addMethod(
-      'POST',
-      new apigateway.LambdaIntegration(ipAllowlistManager.function),
-      {
-        authorizer,
-        authorizationType: apigateway.AuthorizationType.COGNITO,
-      }
-    );
+    ipResource.addMethod('GET', new apigateway.LambdaIntegration(ipAllowlistManager.function), {
+      authorizer,
+      authorizationType: apigateway.AuthorizationType.COGNITO,
+    });
+    ipResource.addMethod('POST', new apigateway.LambdaIntegration(ipAllowlistManager.function), {
+      authorizer,
+      authorizationType: apigateway.AuthorizationType.COGNITO,
+    });
 
     this.apiEndpoint = this.api.url;
 

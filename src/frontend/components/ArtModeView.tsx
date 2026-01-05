@@ -29,7 +29,7 @@ export const ArtModeView: React.FC<ArtModeViewProps> = ({ upcomingEvents }) => {
         fontSize: '20px',
       }}
     >
-      <h3 style={{ margin: '0 0 12px 0' }}>Today's Events</h3>
+      <h3 style={{ margin: '0 0 12px 0' }}>Today&apos;s Events</h3>
       {todayEvents.length === 0 ? (
         <p>No events scheduled for today</p>
       ) : (

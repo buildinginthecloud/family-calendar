@@ -2,7 +2,7 @@
 
 ## Projen-Based Project Setup
 
-This project is managed by [projen](https://projen.io/), which provides a structured way to manage project configuration through code.
+This project is managed by [Projen](https://projen.io/), which provides a structured way to manage project configuration through code. **All project configuration is defined in `.projenrc.ts`**.
 
 ## Prerequisites
 
@@ -13,17 +13,17 @@ This project is managed by [projen](https://projen.io/), which provides a struct
 
 ## Initial Setup
 
-### 1. Install Dependencies
+### 1. Install Dependencies and Generate Configuration
 
 ```bash
-# The project uses projen to manage configuration
-# First, run projen to generate/update all configuration files
-npx projen
+# Projen manages all configuration files
+# Run projen to ensure all files are up-to-date
+npm run projen
 
 # This will:
-# - Generate package.json with all dependencies
-# - Create/update TypeScript configuration
-# - Set up Jest, ESLint, and Prettier
+# - Regenerate package.json with all dependencies
+# - Update TypeScript configuration
+# - Refresh Jest, ESLint, and Prettier settings
 # - Install all npm dependencies automatically
 ```
 
@@ -70,17 +70,19 @@ The entire project configuration is defined in `.projenrc.ts`. This file control
 
 ### Making Configuration Changes
 
-**⚠️ IMPORTANT**: Do NOT manually edit these files:
+**⚠️ IMPORTANT**: Do NOT manually edit these Projen-managed files:
 - `package.json`
 - `tsconfig.json`
-- `jest.config.js`
-- `.eslintrc.js`
-- `.prettierrc`
+- `tsconfig.dev.json`
+- `.eslintrc.json`
+- `.prettierrc.json`
 - `.gitignore`
+- `cdk.json`
+- `LICENSE`
 
 Instead:
 1. Edit `.projenrc.ts` with your desired changes
-2. Run `npx projen` to regenerate configuration files
+2. Run `npm run projen` to regenerate configuration files
 3. Commit both `.projenrc.ts` and the regenerated files
 
 ## Development Workflow
@@ -300,10 +302,10 @@ npm run cdk:deploy -- --verbose
 
 ## Additional Resources
 
-- **Design Document**: `.kiro/specs/family-calendar-display/design.md`
-- **CDK Best Practices**: `.kiro/steering/cdk-best-practices.md`
-- **TypeScript Best Practices**: `.kiro/steering/typescript-best-practices.md`
-- **Testing Best Practices**: `.kiro/steering/testing-best-practices.md`
+- **Design Document**: `../.kiro/specs/family-calendar-display/design.md`
+- **CDK Best Practices**: `../.kiro/steering/cdk-best-practices.md`
+- **TypeScript Best Practices**: `../.kiro/steering/typescript-best-practices.md`
+- **Testing Best Practices**: `../.kiro/steering/testing-best-practices.md`
 - **Projen Documentation**: https://projen.io/
 - **AWS CDK Documentation**: https://docs.aws.amazon.com/cdk/
 

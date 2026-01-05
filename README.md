@@ -52,12 +52,17 @@ family-calendar/
 │   ├── frontend/                       # Frontend component tests
 │   ├── properties/                     # Property-based tests
 │   └── setup.ts                        # Test configuration
+├── docs/                               # Documentation
+│   ├── QUICKSTART.md                   # Quick start guide
+│   ├── SETUP_INSTRUCTIONS.md           # Detailed setup guide
+│   ├── PROJECT_STRUCTURE.md            # File organization
+│   ├── AUTHENTICATION_SETUP.md         # Authentication guide
+│   └── IMPLEMENTATION_SUMMARY.md       # Implementation status
 ├── package.json
 ├── tsconfig.json
 ├── cdk.json                            # CDK configuration
 ├── jest.config.js                      # Jest configuration
 ├── .eslintrc.js                        # ESLint configuration
-├── AUTHENTICATION_SETUP.md             # Authentication documentation
 └── README.md                           # This file
 ```
 
@@ -171,7 +176,7 @@ Following `.kiro/steering/security-best-practices.md`:
 - ✅ Security audit logging enabled
 - ✅ Optional MFA for enhanced security
 
-For detailed authentication setup and configuration, see [AUTHENTICATION_SETUP.md](./AUTHENTICATION_SETUP.md).
+For detailed authentication setup and configuration, see [docs/AUTHENTICATION_SETUP.md](./docs/AUTHENTICATION_SETUP.md).
 
 ## 📐 TypeScript Configuration
 
@@ -301,7 +306,11 @@ Each property is validated through property-based tests in `test/properties/`.
 
 ## 📚 Additional Documentation
 
-- **Authentication Setup**: `AUTHENTICATION_SETUP.md` - Comprehensive guide to authentication and security
+- **Quick Start**: [docs/QUICKSTART.md](./docs/QUICKSTART.md) - Get up and running quickly
+- **Setup Instructions**: [docs/SETUP_INSTRUCTIONS.md](./docs/SETUP_INSTRUCTIONS.md) - Detailed setup guide
+- **Project Structure**: [docs/PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md) - File organization and architecture
+- **Authentication Setup**: [docs/AUTHENTICATION_SETUP.md](./docs/AUTHENTICATION_SETUP.md) - Comprehensive authentication guide
+- **Implementation Summary**: [docs/IMPLEMENTATION_SUMMARY.md](./docs/IMPLEMENTATION_SUMMARY.md) - Current implementation status
 - Design Document: `.kiro/specs/family-calendar-display/design.md`
 - Requirements: `.kiro/specs/family-calendar-display/requirements.md`
 - Tasks: `.kiro/specs/family-calendar-display/tasks.md`
