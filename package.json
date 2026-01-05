@@ -1,0 +1,62 @@
+{
+  "name": "family-calendar",
+  "version": "0.1.0",
+  "description": "Family Calendar Display for Samsung Frame TV",
+  "main": "lib/app.js",
+  "types": "lib/app.d.ts",
+  "bin": {
+    "family-calendar": "bin/family-calendar.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest --silent",
+    "test:watch": "jest --watch --silent",
+    "test:coverage": "jest --coverage --silent",
+    "cdk": "cdk",
+    "cdk:synth": "cdk synth",
+    "cdk:deploy": "cdk deploy",
+    "cdk:diff": "cdk diff",
+    "cdk:destroy": "cdk destroy",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
+  },
+  "keywords": [
+    "family-calendar",
+    "aws-cdk",
+    "serverless",
+    "samsung-frame-tv"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "aws-cdk": "^2.126.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.126.0",
+    "cdk-iam-floyd": "^0.2000.0",
+    "constructs": "^10.3.0",
+    "fast-check": "^3.15.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
