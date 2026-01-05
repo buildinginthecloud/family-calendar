@@ -18,7 +18,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   // Project metadata
   name: 'family-calendar',
   description: 'Family Calendar Display for Samsung Frame TV',
-  cdkVersion: '2.126.0', // Use latest stable CDK version
+  cdkVersion: '2.215.0', // Latest stable CDK version (as of Jan 2026)
   defaultReleaseBranch: 'main',
   packageManager: NodePackageManager.NPM,
   
@@ -132,7 +132,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   
   // Dependencies
   deps: [
-    'aws-cdk-lib@^2.126.0',
+    'aws-cdk-lib@^2.215.0',
     'constructs@^10.3.0',
     'cdk-iam-floyd@^0.2000.0', // Per CDK best practices for IAM policy generation
     'react@^18.2.0',
